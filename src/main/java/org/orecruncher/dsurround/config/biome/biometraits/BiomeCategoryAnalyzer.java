@@ -1,35 +1,44 @@
 package org.orecruncher.dsurround.config.biome.biometraits;
 
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import org.orecruncher.dsurround.lib.GameUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class BiomeCategoryAnalyzer implements IBiomeTraitAnalyzer {
     @Override
     public Collection<BiomeTrait> evaluate(Identifier id, Biome biome) {
         List<BiomeTrait> results = new ArrayList<>();
 
-        var path = id.getPath();
-//        var category = ((BiomeAccessor) (Object) biome).getCategory();
-//        results.add(BiomeTrait.of(category));
+        //Biome selector (in biomes.jsom) checks biome id in traits (like minecraft:ocean)
+        //We start use ConventionalBiomeTags from Fabric to fix this
+        var biomes = GameUtils.getWorld().getRegistryManager().get(Registry.BIOME_KEY);
 
-        if (path.contains("ocean") || path.contains("river"))
-//        if (category == Biome.Category.OCEAN || category == Biome.Category.RIVER)
+        //Search tags for current biome, sort only Fabric tags, checks to contain in BiomeTrait, and covert
+        var entry = biomes.getEntry(biomes.getRawId(biome));
+        if (entry.isPresent()) {
+            List<BiomeTrait> biomeTraits = entry.get()
+                    .streamTags()
+                    .filter(d -> d.id().toString().startsWith("c:")) //only fabric tags
+                    .filter(BiomeTrait.tagMapper::containsKey)
+                    .map(BiomeTrait.tagMapper::get)
+                    .toList();
+            results.addAll(biomeTraits);
+        }
+
+        var path = id.getPath();
+        if (results.contains(BiomeTrait.OCEAN) || results.contains(BiomeTrait.RIVER))
             results.add(BiomeTrait.WATER);
 
-        if (path.contains("beach") || path.contains("desert") || path.contains("badlands"))
-//        if (category == Biome.Category.BEACH || category == Biome.Category.DESERT)
+        if (results.contains(BiomeTrait.BEACH) || results.contains(BiomeTrait.DESERT) || path.contains("badlands"))
             results.add(BiomeTrait.SANDY);
 
-        if (!path.contains("nether") && !path.contains("soul_sand_valley") && !path.contains("basalt_deltas") && !path.contains("warped_forest") && !path.contains("crimson_forest") && !path.contains("the_end") && !path.contains("end_"))
-//        if (category != Biome.Category.NETHER && category != Biome.Category.THEEND)
+        if (!results.contains(BiomeTrait.NETHER) && !results.contains(BiomeTrait.THEEND))
             results.add(BiomeTrait.OVERWORLD);
 
-        if (path.contains("taiga"))
-//        if (category == Biome.Category.TAIGA)
+        if (results.contains(BiomeTrait.TAIGA))
             results.add(BiomeTrait.CONIFEROUS);
 
         return results;

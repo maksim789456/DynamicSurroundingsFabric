@@ -1,9 +1,15 @@
 package org.orecruncher.dsurround.config.biome.biometraits;
 
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
+import net.minecraft.tag.BiomeTags;
+import net.minecraft.tag.TagKey;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public enum BiomeTrait {
     // Generic case of WTF
@@ -20,23 +26,23 @@ public enum BiomeTrait {
     UNDER_OCEAN("UNDER_OCEAN"),
     // Biome categories as traits
     NONE("none"),
-    TAIGA("taiga"),
-    EXTREME_HILLS("extreme_hills"),
-    JUNGLE("jungle"),
-    MESA("mesa"),
-    PLAINS("plains"),
-    SAVANNA("savanna"),
-    ICY("icy"),
-    THEEND("the_end"),
-    BEACH("beach"),
-    FOREST("forest"),
-    OCEAN("ocean"),
-    DESERT("desert"),
-    RIVER("river"),
-    SWAMP("swamp"),
-    MUSHROOM("mushroom"),
-    NETHER("nether"),
-    UNDERGROUND("underground"),
+    TAIGA("taiga", ConventionalBiomeTags.TAIGA),
+    EXTREME_HILLS("extreme_hills", ConventionalBiomeTags.EXTREME_HILLS),
+    JUNGLE("jungle", ConventionalBiomeTags.JUNGLE),
+    MESA("mesa", ConventionalBiomeTags.MESA),
+    PLAINS("plains", ConventionalBiomeTags.PLAINS),
+    SAVANNA("savanna", ConventionalBiomeTags.SAVANNA),
+    ICY("icy", ConventionalBiomeTags.ICY),
+    THEEND("the_end", ConventionalBiomeTags.IN_THE_END),
+    BEACH("beach", ConventionalBiomeTags.BEACH),
+    FOREST("forest", ConventionalBiomeTags.FOREST),
+    OCEAN("ocean", ConventionalBiomeTags.OCEAN),
+    DESERT("desert", ConventionalBiomeTags.DESERT),
+    RIVER("river", ConventionalBiomeTags.RIVER),
+    SWAMP("swamp", ConventionalBiomeTags.SWAMP),
+    MUSHROOM("mushroom", ConventionalBiomeTags.MUSHROOM),
+    NETHER("nether", ConventionalBiomeTags.IN_NETHER),
+    UNDERGROUND("underground", ConventionalBiomeTags.UNDERGROUND),
     /* Extended categories */
     WATER("WATER"),
     WET("WET"),
@@ -60,6 +66,7 @@ public enum BiomeTrait {
     DEEP("DEEP");
 
     private static final Map<String, BiomeTrait> mapper = new HashMap<>();
+    public static final Map<TagKey<Biome>, BiomeTrait> tagMapper = new HashMap<>();
 
     static {
         register(BiomeTrait.NONE);  // stone_shore why?
@@ -103,9 +110,13 @@ public enum BiomeTrait {
     }
 
     private final String name;
+    private TagKey<Biome> tag;
 
-    BiomeTrait(String name) {
+    @SafeVarargs
+    BiomeTrait(String name, TagKey<Biome>... tags) {
         this.name = name.toUpperCase();
+        var first = Arrays.stream(tags).findFirst();
+        first.ifPresent(biomeTagKey -> this.tag = biomeTagKey);
     }
 
 //    public static BiomeTrait of(Biome.Category category) {
@@ -120,10 +131,16 @@ public enum BiomeTrait {
 
     private static void register(BiomeTrait trait) {
         mapper.put(trait.name, trait);
+        var tag = trait.getTag();
+        tag.ifPresent(biomeTagKey -> tagMapper.put(biomeTagKey, trait));
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public Optional<TagKey<Biome>> getTag() {
+        return Optional.ofNullable(tag);
     }
 
     @Override
