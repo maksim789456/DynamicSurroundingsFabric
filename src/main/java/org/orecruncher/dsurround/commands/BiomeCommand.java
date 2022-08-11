@@ -22,9 +22,6 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 final class BiomeCommand {
 
     public static void register(@Nullable CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        if (dispatcher == null) {
-            return;
-        }
         dispatcher.register(
                 ClientCommandManager.literal("dsbiome")
                         .then(argument("biomeId", IdentifierArgumentType.identifier())

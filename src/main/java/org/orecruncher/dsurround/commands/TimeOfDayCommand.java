@@ -14,9 +14,6 @@ import org.orecruncher.dsurround.lib.MinecraftClock;
 @Environment(EnvType.CLIENT)
 public class TimeOfDayCommand {
     public static void register(@Nullable CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        if (dispatcher == null) {
-            return;
-        }
         dispatcher.register(
                 ClientCommandManager.literal("dstod").executes(TimeOfDayCommand::execute));
     }

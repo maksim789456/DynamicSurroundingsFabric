@@ -18,9 +18,6 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.arg
 final class ScriptCommand {
 
     public static void register(@Nullable CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        if (dispatcher == null) {
-            return;
-        }
         dispatcher.register(
                 ClientCommandManager.literal("dsscript")
                         .then(argument("script", MessageArgumentType.message())

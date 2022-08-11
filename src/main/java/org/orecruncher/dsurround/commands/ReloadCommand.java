@@ -13,9 +13,6 @@ import org.orecruncher.dsurround.config.*;
 @Environment(EnvType.CLIENT)
 public class ReloadCommand {
     public static void register(@Nullable CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        if (dispatcher == null) {
-            return;
-        }
         dispatcher.register(
                 ClientCommandManager.literal("dsreload").executes(ReloadCommand::execute));
     }

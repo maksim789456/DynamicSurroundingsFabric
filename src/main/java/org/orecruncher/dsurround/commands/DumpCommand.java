@@ -22,9 +22,6 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.lit
 class DumpCommand {
 
     public static void register(@Nullable CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        if (dispatcher == null) {
-            return;
-        }
         dispatcher.register(literal("dsdump")
                 .then(literal("biomes").executes(cmd -> dumpBiomes(cmd.getSource())))
                 .then(literal("sounds").executes(cmd -> dumpSounds(cmd.getSource())))
