@@ -15,6 +15,7 @@ import org.orecruncher.dsurround.lib.collections.ObjectArray;
 import org.orecruncher.dsurround.lib.logging.IModLog;
 import org.orecruncher.dsurround.lib.math.TimerEMA;
 import org.orecruncher.dsurround.lib.threading.Worker;
+import org.orecruncher.dsurround.processing.Scanners;
 import org.orecruncher.dsurround.runtime.audio.effects.Effects;
 import org.orecruncher.dsurround.xface.ISourceContext;
 
@@ -100,8 +101,17 @@ public final class SoundFXProcessor {
         return sound.isRelative()
                 || sound.getAttenuationType() == SoundInstance.AttenuationType.NONE
                 || sound.getCategory() == SoundCategory.MASTER
-                || sound.getCategory() == SoundCategory.MUSIC
-                || sound.getCategory() == SoundCategory.WEATHER;
+                || sound.getCategory() == SoundCategory.MUSIC;
+    }
+
+    private static boolean shouldPlayWeatherSoundInside(SoundInstance sound) {
+        var mufflingEnabled = false;
+        if (Client.Config != null)
+            mufflingEnabled = Client.Config.weatherEffects.muffleWeatherSoundInside;
+        var isWeatherSound = sound.getCategory() == SoundCategory.WEATHER;
+        var playerInside = Scanners.isInside();
+
+        return mufflingEnabled && isWeatherSound && playerInside;
     }
 
     /**
@@ -117,6 +127,9 @@ public final class SoundFXProcessor {
             return;
 
         if (shouldIgnoreSound(sound))
+            return;
+
+        if (!shouldPlayWeatherSoundInside(sound))
             return;
 
         // Double suplex!  Queue the operation on the sound executor to do the config work.  This should queue in

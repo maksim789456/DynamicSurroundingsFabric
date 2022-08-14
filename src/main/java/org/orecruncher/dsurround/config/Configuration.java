@@ -25,8 +25,8 @@ public class Configuration extends ConfigurationData {
     public final EnhancedSounds enhancedSounds = new EnhancedSounds();
 
     @Property
-    @Comment("Configuration options for thunder storms")
-    public final ThunderStorms thunderStorms = new ThunderStorms();
+    @Comment("Configuration options for weather effects")
+    public final WeatherEffects weatherEffects = new WeatherEffects();
 
     @Property
     @Comment("Configuration options for block effects")
@@ -150,10 +150,14 @@ public class Configuration extends ConfigurationData {
         public int outputFrequency = 0;
     }
 
-    public static class ThunderStorms {
+    public static class WeatherEffects {
         @Property
         @Comment("Enables replacement of thunder sounds with Dynamic Surroundings' version")
         public boolean replaceThunderSounds = true;
+
+        @Property
+        @Comment("Enables sound muffling for weather inside buildings, caves and etg. [EXPERIMENTAL]")
+        public boolean muffleWeatherSoundInside = false;
     }
 
     public static class BlockEffects {
