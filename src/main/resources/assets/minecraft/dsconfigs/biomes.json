@@ -336,7 +336,7 @@
     "acoustics": [
       {
         "soundEventId": "biome.underground",
-        "conditions": "state.isInside() && player.getY() < 50"
+        "conditions": "state.isInside() && player.getY() < 60"
       },
       {
         "soundEventId": "rockfall",

@@ -473,8 +473,13 @@
 	"biome.underground": {
 		"sounds": [
 			{
-				"name": "dsurround:ambient/underground/ambient",
+				"name": "dsurround:ambient/underground/ambient1",
 				"volume": 0.3,
+				"stream": true
+			},
+			{
+				"name": "dsurround:ambient/underground/ambient2",
+				"volume": 0.15,
 				"stream": true
 			}
 		]
