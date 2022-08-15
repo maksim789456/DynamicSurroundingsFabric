@@ -27,7 +27,7 @@
     ]
   },
   {
-    "biomeSelector": "biome.isAllOf('Cold', 'Icy')",
+    "biomeSelector": "biome.isAllOf('Cold', 'Icy') && !lib.oneof(biome.id, 'minecraft:frozen_river')",
     "_comment": "Arctic Wind",
     "acoustics": [
       {

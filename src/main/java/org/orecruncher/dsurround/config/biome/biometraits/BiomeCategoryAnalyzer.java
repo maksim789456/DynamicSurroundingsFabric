@@ -1,8 +1,10 @@
 package org.orecruncher.dsurround.config.biome.biometraits;
 
+import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import org.orecruncher.dsurround.lib.GameUtils;
 
 import java.util.*;
@@ -40,6 +42,22 @@ public class BiomeCategoryAnalyzer implements IBiomeTraitAnalyzer {
 
         if (results.contains(BiomeTrait.TAIGA))
             results.add(BiomeTrait.CONIFEROUS);
+
+        //Arctic Wind in snow biomes
+        if (path.contains("snowy_slopes") || path.contains("jagged_peaks") || path.contains("grove"))
+        {
+            if (!results.contains(BiomeTrait.COLD))
+                results.add(BiomeTrait.COLD);
+
+            if (!results.contains(BiomeTrait.ICY))
+                results.add(BiomeTrait.ICY);
+        }
+
+        if (path.contains("meadow"))
+            results.add(BiomeTrait.PLAINS);
+
+        if (path.contains("stony_peaks"))
+            results.add(BiomeTrait.HILLS);
 
         return results;
     }
