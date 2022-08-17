@@ -9,9 +9,9 @@ A Minecraft Fabric Mod that alters the fabric of Minecraft experience by weaving
 This mod is a spiritual successor to the Forge based Dynamic Surroundings series.  Though a lot of the functionality is similar the ultimate feature set will be different.  My focus is on extending the Vanilla aspect of gameplay rather than introducing anything radical.  Besides, Microsoft is adding features to Minecraft that fill the gaps that Dynamic Surroundings has historically tried to address.  I expect this trend to continue.
 
 **Requirements**
-* JAVA 16+ (I am using Adoptium https://adoptium.net/)
-* Fabric Loader >=0.11.7
-* Fabric API 0.40.8+1.17
+* Minecraft >=1.19
+* Fabric Loader >=0.14.7
+* Fabric API >=0.57.0+1.19
 * 100% client side; no server side deployment needed
 
 **Recommended Additions**

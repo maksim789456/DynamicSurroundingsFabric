@@ -18,17 +18,17 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-    modImplementation "com.terraformersmc:modmenu:4.0.0"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     modImplementation "org.openjdk.nashorn:nashorn-core:15.3"
     include("org.openjdk.nashorn:nashorn-core:15.3")
 
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:7.0.69") {
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
-    include("me.shedaniel.cloth:cloth-config-fabric:7.0.69")
+    include("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}")
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.
