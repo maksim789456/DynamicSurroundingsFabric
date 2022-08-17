@@ -23,36 +23,48 @@ public class WaterSplashJetEffect extends ParticleJetEffect {
 
     // Used to spread sound starts over a range to minimize harmonics
     private static final int THROTTLE_RANGE = 10;
+
+    private static final float VOLUME_MIN = 0.1F;
+    private static final float VOLUME_MAX = 0.5F;
+    private static final float PITCH_MIN = 0.8F;
+    private static final float PITCH_MAX = 1.2F;
+
     private static final ISoundFactory[] waterfallAcoustics = new ISoundFactory[BlockEffectProducer.MAX_STRENGTH + 1];
 
     static {
         var factory = SoundFactoryBuilder.create(new Identifier(Client.ModId, "waterfall.0"))
-                .pitchRange(0.8F, 1.2F)
+                .volumeRange(VOLUME_MIN, VOLUME_MAX)
+                .pitchRange(PITCH_MIN, PITCH_MAX)
                 .build();
         Arrays.fill(waterfallAcoustics, factory);
 
         factory = SoundFactoryBuilder.create(new Identifier(Client.ModId, "waterfall.1"))
-                .pitchRange(0.8F, 1.2F)
+                .volumeRange(VOLUME_MIN, VOLUME_MAX)
+                .pitchRange(PITCH_MIN, PITCH_MAX)
                 .build();
         waterfallAcoustics[2] = waterfallAcoustics[3] = factory;
 
         factory = SoundFactoryBuilder.create(new Identifier(Client.ModId, "waterfall.2"))
-                .pitchRange(0.8F, 1.2F)
+                .volumeRange(VOLUME_MIN, VOLUME_MAX)
+                .pitchRange(PITCH_MIN, PITCH_MAX)
                 .build();
         waterfallAcoustics[4] = factory;
 
         factory = SoundFactoryBuilder.create(new Identifier(Client.ModId, "waterfall.3"))
-                .pitchRange(0.8F, 1.2F)
+                .volumeRange(VOLUME_MIN, VOLUME_MAX)
+                .pitchRange(PITCH_MIN, PITCH_MAX)
                 .build();
         waterfallAcoustics[5] = waterfallAcoustics[6] = factory;
 
         factory = SoundFactoryBuilder.create(new Identifier(Client.ModId, "waterfall.4"))
-                .pitchRange(0.8F, 1.2F)
+                .volumeRange(VOLUME_MIN, VOLUME_MAX)
+                .pitchRange(PITCH_MIN, PITCH_MAX)
                 .build();
         waterfallAcoustics[7] = waterfallAcoustics[8] = factory;
 
         factory = SoundFactoryBuilder.create(new Identifier(Client.ModId, "waterfall.5"))
-                .pitchRange(0.8F, 1.2F)
+                .volumeRange(VOLUME_MIN, VOLUME_MAX)
+                .pitchRange(PITCH_MIN, PITCH_MAX)
                 .build();
         waterfallAcoustics[9] = waterfallAcoustics[10] = factory;
     }

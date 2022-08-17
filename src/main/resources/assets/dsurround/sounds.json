@@ -479,7 +479,7 @@
 			},
 			{
 				"name": "dsurround:ambient/underground/ambient2",
-				"volume": 0.15,
+				"volume": 0.2,
 				"stream": true
 			}
 		]
