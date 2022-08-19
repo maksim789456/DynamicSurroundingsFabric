@@ -1,9 +1,15 @@
 package org.orecruncher.dsurround.config.biome.biometraits;
 
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
+import net.minecraft.tag.BiomeTags;
+import net.minecraft.tag.TagKey;
 import net.minecraft.world.biome.Biome;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public enum BiomeTrait {
     // Generic case of WTF
@@ -19,24 +25,24 @@ public enum BiomeTrait {
     UNDER_WATER("UNDER_WATER"),
     UNDER_OCEAN("UNDER_OCEAN"),
     // Biome categories as traits
-    NONE(Biome.Category.NONE.getName()),
-    TAIGA(Biome.Category.TAIGA.getName()),
-    EXTREME_HILLS(Biome.Category.EXTREME_HILLS.getName()),
-    JUNGLE(Biome.Category.JUNGLE.getName()),
-    MESA(Biome.Category.MESA.getName()),
-    PLAINS(Biome.Category.PLAINS.getName()),
-    SAVANNA(Biome.Category.SAVANNA.getName()),
-    ICY(Biome.Category.ICY.getName()),
-    THEEND(Biome.Category.THEEND.getName()),
-    BEACH(Biome.Category.BEACH.getName()),
-    FOREST(Biome.Category.FOREST.getName()),
-    OCEAN(Biome.Category.OCEAN.getName()),
-    DESERT(Biome.Category.DESERT.getName()),
-    RIVER(Biome.Category.RIVER.getName()),
-    SWAMP(Biome.Category.SWAMP.getName()),
-    MUSHROOM(Biome.Category.MUSHROOM.getName()),
-    NETHER(Biome.Category.NETHER.getName()),
-    UNDERGROUND(Biome.Category.UNDERGROUND.getName()),
+    NONE("none"),
+    TAIGA("taiga", ConventionalBiomeTags.TAIGA),
+    EXTREME_HILLS("extreme_hills", ConventionalBiomeTags.EXTREME_HILLS),
+    JUNGLE("jungle", ConventionalBiomeTags.JUNGLE),
+    MESA("mesa", ConventionalBiomeTags.MESA),
+    PLAINS("plains", ConventionalBiomeTags.PLAINS),
+    SAVANNA("savanna", ConventionalBiomeTags.SAVANNA),
+    ICY("icy", ConventionalBiomeTags.ICY),
+    THEEND("the_end", ConventionalBiomeTags.IN_THE_END),
+    BEACH("beach", ConventionalBiomeTags.BEACH),
+    FOREST("forest", ConventionalBiomeTags.FOREST),
+    OCEAN("ocean", ConventionalBiomeTags.OCEAN),
+    DESERT("desert", ConventionalBiomeTags.DESERT),
+    RIVER("river", ConventionalBiomeTags.RIVER),
+    SWAMP("swamp", ConventionalBiomeTags.SWAMP),
+    MUSHROOM("mushroom", ConventionalBiomeTags.MUSHROOM),
+    NETHER("nether", ConventionalBiomeTags.IN_NETHER),
+    UNDERGROUND("underground", ConventionalBiomeTags.UNDERGROUND),
     /* Extended categories */
     WATER("WATER"),
     WET("WET"),
@@ -60,6 +66,7 @@ public enum BiomeTrait {
     DEEP("DEEP");
 
     private static final Map<String, BiomeTrait> mapper = new HashMap<>();
+    public static final Map<TagKey<Biome>, BiomeTrait> tagMapper = new HashMap<>();
 
     static {
         register(BiomeTrait.NONE);  // stone_shore why?
@@ -103,15 +110,19 @@ public enum BiomeTrait {
     }
 
     private final String name;
+    private TagKey<Biome> tag;
 
-    BiomeTrait(String name) {
+    @SafeVarargs
+    BiomeTrait(String name, TagKey<Biome>... tags) {
         this.name = name.toUpperCase();
+        var first = Arrays.stream(tags).findFirst();
+        first.ifPresent(biomeTagKey -> this.tag = biomeTagKey);
     }
 
-    public static BiomeTrait of(Biome.Category category) {
-        var result = mapper.get(category.getName().toUpperCase());
-        return result == null ? UNKNOWN : result;
-    }
+//    public static BiomeTrait of(Biome.Category category) {
+//        var result = mapper.get(category.getName().toUpperCase());
+//        return result == null ? UNKNOWN : result;
+//    }
 
     public static BiomeTrait of(String name) {
         var result = mapper.get(name.toUpperCase());
@@ -120,10 +131,16 @@ public enum BiomeTrait {
 
     private static void register(BiomeTrait trait) {
         mapper.put(trait.name, trait);
+        var tag = trait.getTag();
+        tag.ifPresent(biomeTagKey -> tagMapper.put(biomeTagKey, trait));
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public Optional<TagKey<Biome>> getTag() {
+        return Optional.ofNullable(tag);
     }
 
     @Override

@@ -74,7 +74,7 @@ public final class SoundInstanceHandler {
 
         final Identifier id = theSound.getId();
 
-        if (Client.Config.thunderStorms.replaceThunderSounds && thunderSounds.contains(id)) {
+        if (Client.Config.weatherEffects.replaceThunderSounds && thunderSounds.contains(id)) {
             // Yeah - a bit reentrant but it should be good
             var sound = THUNDER_SOUND.createAtLocation(
                     new Vec3d(theSound.getX(), theSound.getY(), theSound.getZ()));
