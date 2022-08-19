@@ -6,9 +6,12 @@
       "0.0.2": "Second Alpha",
       "0.0.3": "https://github.com/OreCruncher/DynamicSurroundingsFabric/blob/main/CHANGELOG.md#dynamicsurroundings-fabric-1171-003",
       "0.0.4": "https://github.com/OreCruncher/DynamicSurroundingsFabric/blob/main/CHANGELOG.md#dynamicsurroundings-fabric-1171-004"
+    },
+    "1.19": {
+      "0.1.0": "First beta"
     }
   },
   "recommend": {
-    "1.17.1": "0.0.4"
+    "1.19": "0.1.0"
   }
 }

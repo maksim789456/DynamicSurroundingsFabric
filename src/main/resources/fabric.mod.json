@@ -2,14 +2,16 @@
   "schemaVersion": 1,
   "id": "dsurround",
   "version": "${version}",
-  "name": "Dynamic Surroundings: Fabric Edition",
+  "name": "Dynamic Surroundings: Remastered Fabric Edition",
   "description": "Alters the fabric of Minecraft experience by weaving a tapestry of sound and visual effects",
   "authors": [
     "OreCruncher",
+    "maksim789456",
+    "jmattingley23"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/dynamic-surroundings-fabric-edition",
-    "issues": "https://github.com/OreCruncher/DynamicSurroundingsFabric/issues"
+    "issues": "https://github.com/maksim789456/DynamicSurroundingsFabric/issues"
   },
   "license": "MIT",
   "icon": "assets/dsurround/icon.png",
@@ -34,14 +36,14 @@
   "custom": {
     "modmenu": {
       "links": {
-        "dsurround.mod.link.sources": "https://github.com/OreCruncher/DynamicSurroundingsFabric",
-        "dsurround.mod.link.credits": "https://github.com/OreCruncher/DynamicSurroundingsFabric/blob/main/CREDITS.md",
+        "dsurround.mod.link.sources": "https://github.com/maksim789456/DynamicSurroundingsFabric",
+        "dsurround.mod.link.credits": "https://github.com/maksim789456/DynamicSurroundingsFabric/blob/main/CREDITS.md",
         "dsurround.mod.link.clothapi": "https://www.curseforge.com/minecraft/mc-mods/cloth-api",
         "dsurround.mod.link.nashorn": "https://github.com/openjdk/nashorn"
       }
     },
     "dsurround": {
-      "updateURL": "https://raw.githubusercontent.com/OreCruncher/DynamicSurroundingsFabric/main/versions.json"
+      "updateURL": "https://raw.githubusercontent.com/maksim789456/DynamicSurroundingsFabric/main/versions.json"
     }
   }
 }

@@ -1,4 +1,4 @@
-> ### Dynamic Surroundings: Fabric Edition
+> ### Dynamic Surroundings: Remastered Fabric Edition
 A Minecraft Fabric Mod that alters the fabric of Minecraft experience by weaving a tapestry of sound and visual effects.
 
 <a href="https://www.curseforge.com/minecraft/mc-mods/dynamic-surroundings-fabric-edition"><img src="http://cf.way2muchnoise.eu/versions/535715.svg" alt="CurseForge Project"/></a>
@@ -16,6 +16,9 @@ This mod is a spiritual successor to the Forge based Dynamic Surroundings series
 
 **Recommended Additions**
 * [Mod Menu (CurseForge)](https://www.curseforge.com/minecraft/mc-mods/modmenu) or [ModMenu (Modrinth)](https://modrinth.com/mod/modmenu) to get in-game mod configuration menu.
+* [Cloth Config API (CurseForge)](https://www.curseforge.com/minecraft/mc-mods/cloth-config) for configuration screen.
+
+**Optional Additions**
 * [Presence Footsteps (CurseForge)](https://www.curseforge.com/minecraft/mc-mods/presence-footsteps) or [Presence Foosteps (Modrinth)](https://modrinth.com/mod/presence-footsteps) for footstep acoustics
 
 **Features**
@@ -44,7 +47,7 @@ This mod is a spiritual successor to the Forge based Dynamic Surroundings series
 
 **What's Being Dropped**
 * Aurora.  Good at turning a computer into a space heater, and I do not know enough about shaders to improve.
-* Mob/player footstep and toolbar effects.
+* Mob/player footstep.
 * Specialized fog effects.  Minecraft has made some improvements in this area, and I expect it to continue.  I don't want to be in a position of overriding (or managing the problem) of when Microsoft adds more dynamic content.
 * Weather effects.  Again, there have been improvements to Minecraft.  I may add some additional processing around weather, but I do not expect to make major changes.
 
@@ -52,6 +55,10 @@ As I indicated these features are not planned.  Based on time commitments I may 
 
 **Planned Features**
 * Making the config system publicly available so that pack authors can configure things.  This is possible with this release, but I may change things.  Besides, it has to be documented so that someone would know what to do.
+
+**Special Thanks**
+* [OreCruncher](https://github.com/OreCruncher) author of original [Forge mod](https://github.com/OreCruncher/DynamicSurroundings) and [Fabric Mod](https://github.com/OreCruncher/DynamicSurroundingsFabric)
+* [jmattingley23](https://github.com/jmattingley23) author of [origin fork](https://github.com/jmattingley23/DynamicSurroundingsFabric) with 1.19.* Minecraft support
 
 > ### License
 The MIT License (MIT)
