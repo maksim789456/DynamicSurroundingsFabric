@@ -1,5 +1,6 @@
 {
   "dsurround.modname": "§6Dynamic Surroundings",
+  "modmenu.descriptionTranslation.dsurround": "Alters the fabric of Minecraft experience by weaving a tapestry of sound and visual effects",
   "dsurround.text.NewVersion": "[\"§6Update Available: §9[\",{\"text\":\"§2%1$s §ev%2$s§f\",\"color\":\"gold\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"Click for Download Page\",\"color\":\"aqua\"}},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"%3$s\"}},\"§9]\"]",
   "dsurround.mod.link.sources": "Source code repository",
   "dsurround.mod.link.credits": "Sound resource CREDIT and ATTRIBUTIONS",
@@ -88,6 +89,8 @@
   "dsurround.config.blockEffects.enableWaterfallParticles.tooltip": "Enable/disable particles from waterfalls.  Sound effects will still happen if enabled.  If you want to turn off waterfalls use the option §eEnable Waterfall Sounds§r.",
   "dsurround.config.blockEffects.waterRippleStyle": "Water Ripple Render Style",
   "dsurround.config.blockEffects.waterRippleStyle.tooltip": "The style of water ripple to render when a drop hits a fluid.  Commonly happens with rainfall and water splashes.",
+  "dsurround.config.blockEffects.waterRippleStyle.value.none": "None",
+  "dsurround.config.blockEffects.waterRippleStyle.value.pixelated_circle": "Pixelated circle",
   "dsurround.config.entityEffects": "Entity Effect Options",
   "dsurround.config.entityEffects.tooltip": "Configuration options for entity effects",
   "dsurround.config.entityEffects.entityEffectRange": "Entity Effect Range",

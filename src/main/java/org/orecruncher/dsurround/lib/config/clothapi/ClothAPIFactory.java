@@ -10,9 +10,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 import org.orecruncher.dsurround.Client;
+import org.orecruncher.dsurround.lib.Utilities;
 import org.orecruncher.dsurround.lib.config.ConfigElement;
 import org.orecruncher.dsurround.lib.config.ConfigOptions;
 import org.orecruncher.dsurround.lib.config.ConfigurationData;
@@ -163,6 +165,7 @@ public class ClothAPIFactory implements BiFunction<MinecraftClient, Screen, Scre
             fieldBuilder = new EnumSelectorBuilder(builder.getResetButtonKey(), name, v.getEnumClass(), v.getCurrentValue(instance))
                     .setTooltip(tooltip)
                     .setDefaultValue(v.getDefaultValue())
+                    .setEnumNameProvider(v::getLocalizedValueText)
                     .setSaveConsumer(data -> v.setCurrentValue(instance, data));
         }
 
@@ -172,27 +175,4 @@ public class ClothAPIFactory implements BiFunction<MinecraftClient, Screen, Scre
 
         return fieldBuilder;
     }
-
-    /*
-    public StringListListEntry createStringList(final ConfigBuilder builder, final ForgeConfigSpec.ConfigValue<List<? extends String>> value, @Nullable final Function<String, Optional<Text>> validator) {
-        final ConfigProperty property = ConfigProperty.getPropertyInfo(value);
-        final Text name = property.getConfigName();
-        final List<String> list = value.get().stream().map(Object::toString).collect(Collectors.toList());
-        final List<String> defaults = new ArrayList<>(list);
-        final StringListBuilder result = builder.entryBuilder()
-                .startStrList(name, list)
-                .setTooltip(property.getTooltip())
-                .setDefaultValue(defaults)
-                .setSaveConsumer(value::set);
-
-        if (validator != null)
-            result.setCellErrorSupplier(validator);
-
-        if (property.getNeedsWorldRestart())
-            result.requireRestart();
-
-        return result.build();
-    }
-*/
-
 }

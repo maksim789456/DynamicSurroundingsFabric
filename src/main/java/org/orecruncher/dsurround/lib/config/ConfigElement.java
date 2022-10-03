@@ -2,7 +2,9 @@ package org.orecruncher.dsurround.lib.config;
 
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
+import org.orecruncher.dsurround.Client;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -265,6 +267,18 @@ public abstract class ConfigElement<T> {
 
         public Class<? extends Enum<?>> getEnumClass() {
             return this.enumClass;
+        }
+
+        public Text getLocalizedValueText(Enum<?> value) {
+            //create locale key and try to get text
+            var valueKey = value.name().toLowerCase();
+            var key = this.getElementNameKey() + ".value." + valueKey;
+            var localizedValueText = Text.translatable(key);
+            if (!localizedValueText.getString().startsWith(Client.ModId)) //if key don`t exists in locale file 'translatable' return key
+                return localizedValueText;
+
+            //fallback variant, convert enum name to human-readable
+            return Text.of(StringUtils.capitalize(valueKey.replace('_', ' ')));
         }
     }
 
