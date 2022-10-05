@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 import org.orecruncher.dsurround.lib.GameUtils;
@@ -35,8 +36,8 @@ public class IndividualSoundControlScreen extends Screen {
 
     private static final int TOOLTIP_Y_OFFSET = 30;
 
-    private static final Text SAVE = Text.of("gui.done");
-    private static final Text CANCEL = Text.of("gui.cancel");
+    private static final Text SAVE = ScreenTexts.DONE;
+    private static final Text CANCEL = ScreenTexts.CANCEL;
 
     protected final Screen parent;
     protected final boolean enablePlay;
