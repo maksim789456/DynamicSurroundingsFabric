@@ -108,10 +108,9 @@ public final class SoundFXProcessor {
         var mufflingEnabled = false;
         if (Client.Config != null)
             mufflingEnabled = Client.Config.weatherEffects.muffleWeatherSoundInside;
-        var isWeatherSound = sound.getCategory() == SoundCategory.WEATHER;
         var playerInside = Scanners.isInside();
 
-        return mufflingEnabled && isWeatherSound && playerInside;
+        return mufflingEnabled && playerInside;
     }
 
     /**
@@ -129,8 +128,10 @@ public final class SoundFXProcessor {
         if (shouldIgnoreSound(sound))
             return;
 
-        if (!shouldPlayWeatherSoundInside(sound))
-            return;
+        if (sound.getCategory() == SoundCategory.WEATHER) {
+            if (!shouldPlayWeatherSoundInside(sound))
+                return;
+        }
 
         // Double suplex!  Queue the operation on the sound executor to do the config work.  This should queue in
         // behind any attempt at getting a sound source.
