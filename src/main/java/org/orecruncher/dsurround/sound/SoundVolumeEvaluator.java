@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.MathHelper;
+import org.orecruncher.dsurround.Client;
 import org.orecruncher.dsurround.gui.sound.ConfigSoundInstance;
 import org.orecruncher.dsurround.lib.GameUtils;
 
@@ -35,8 +36,14 @@ public final class SoundVolumeEvaluator {
         // with category adjustments.
         if (!(sound instanceof ConfigSoundInstance)) {
             volume *= getCategoryVolumeScale(sound);
+
+            //get volume scale from ISC Screen
+            var volumeScale = Client.SoundConfig.getVolumeScale(sound.getId());
+            if (volumeScale != 0f) {
+                volume *= volumeScale;
+            }
         }
 
-        return MathHelper.clamp(volume, 0, 1F);
+        return volume;
     }
 }
