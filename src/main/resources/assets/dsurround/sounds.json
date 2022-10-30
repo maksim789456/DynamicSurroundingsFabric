@@ -275,9 +275,9 @@
 	},
 	"biome.ocean": {
 		"credits": [
-			"§aocean waves surround me.wav",
-			"bohitomi",
-			"Attribution"
+			"§aCalm Seashore - No Copyright Sound Effects - Audio Library",
+			"Audio Library PH",
+			"Creative Commons Attributions 3.0 Unported"
 		],
 		"sounds": [
 			{
@@ -289,9 +289,9 @@
 	},
 	"biome.ocean.deep": {
 		"credits": [
-			"§aocean waves surround me.wav",
-			"bohitomi",
-			"Attribution"
+			"§aCalm Seashore - No Copyright Sound Effects - Audio Library",
+			"Audio Library PH",
+			"Creative Commons Attributions 3.0 Unported"
 		],
 		"sounds": [
 			{

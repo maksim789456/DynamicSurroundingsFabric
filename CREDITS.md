@@ -96,10 +96,16 @@ whether LPs can be monetized on the various streaming services.
      <li>S: <a href="https://freesound.org/people/DBlover/sounds/405601/">Howling Wind Ambience</a> by <a href="https://www.freesound.org/people/DBlover/">DBlover</a> | License: Creative Commons 0</li>
 </ul>
 
-*dsurround:biome.ocean / dsurround:biome.ocean.deep / dsurround:biome.ocean.deep.under*
+*dsurround:biome.ocean.deep.under*
 
 <ul>
     <li>S: <a href="https://freesound.org/people/bohitomi/sounds/240219/">ocean waves surround me.wav</a> by <a href="https://www.freesound.org/people/DBlover/">bohitomi</a> | License: Attribution</li>
+</ul>
+
+*dsurround:biome.ocean / dsurround:biome.ocean.deep*
+
+<ul>
+    <li>S: <a href="https://www.youtube.com/watch?v=aUeCnyQi3bQ">Calm Seashore - No Copyright Sound Effects - Audio Library</a> by <a href="https://www.youtube.com/c/AudioLibrary69">Audio Library PH</a> | License: Creative Commons Attributions 3.0 Unported</li>
 </ul>
 
 *dsurround:biome.river / dsurround:biome.ocean.under*
