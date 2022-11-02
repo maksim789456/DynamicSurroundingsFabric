@@ -118,6 +118,9 @@ public class Handlers {
             return;
 
         startupSoundPlayed = true;
+        if (!Client.Config.otherOptions.playRandomSoundOnStartup)
+            return;
+
         Client.SoundConfig
                 .getRandomStartupSound()
                 .ifPresent(id -> {
