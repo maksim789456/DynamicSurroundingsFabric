@@ -1,3 +1,31 @@
+> ### DynamicSurroundings-RemasteredFabric-1.19-0.1.1
+**Requirements**
+* Minecraft >=1.19
+* Fabric Loader >=0.14.7
+* Fabric API >=0.57.0+1.19
+
+**What's New**
+* Add Russian localization
+* Add setting to disable random sound on Minecraft startup
+
+**Fixes**
+* Crash when mod installed together with Optifine and Resource Pack who use custom color for rain splash
+* Buttons text in Individual sound control screen
+* Reverberation didn't work
+* Sound scaling in Individual sound control screen didn't apply to sound volume
+
+**Changes**
+* Replace ocean ambient sound because in old sound hear some human sounds
+* Now in config "projectile trails display" enabled as default
+
+> ### DynamicSurroundings-RemasteredFabric-1.19-0.1.0
+**Requirements**
+* Minecraft >=1.19
+* Fabric Loader >=0.14.7
+* Fabric API >=0.57.0+1.19
+
+First beta for Minecraft 1.19
+
 > ### DynamicSurroundings-Fabric-1.17.1-0.0.4
 **Requirements**
 * JAVA 16+ (I am using Adoptium https://adoptium.net/)

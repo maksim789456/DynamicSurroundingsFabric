@@ -1,5 +1,5 @@
 {
-  "downloadLocation": "https://www.curseforge.com/minecraft/mc-mods/dynamic-surroundings-fabric-edition/files",
+  "downloadLocation": "https://www.curseforge.com/minecraft/mc-mods/dynamic-surroundings-remastered-fabric-edition/files",
   "releases": {
     "1.17.1": {
       "0.0.1": "First Alpha",
@@ -8,10 +8,11 @@
       "0.0.4": "https://github.com/OreCruncher/DynamicSurroundingsFabric/blob/main/CHANGELOG.md#dynamicsurroundings-fabric-1171-004"
     },
     "1.19": {
-      "0.1.0": "First beta"
+      "0.1.0": "First beta",
+      "0.1.1": "https://github.com/maksim789456/DynamicSurroundingsFabric/blob/main/CHANGELOG.md#dynamicsurroundings-remasteredfabric-119-011"
     }
   },
   "recommend": {
-    "1.19": "0.1.0"
+    "1.19": "0.1.1"
   }
 }
