@@ -221,11 +221,13 @@ public class IndividualSoundControlListEntry extends EntryListWidget.Entry<Indiv
         if (this.cachedToolTip.size() == 0) {
 
             Identifier id = this.config.soundEventId;
-            final String mod = FrameworkUtils.getModDisplayName(id.getNamespace());
-            assert mod != null;
+            String mod = FrameworkUtils.getModDisplayName(id.getNamespace());
+            if (mod == null) {
+                mod = id.getNamespace();
+            }
             @SuppressWarnings("ConstantConditions")
             OrderedText modName = OrderedText.styledForwardsVisitedString(Formatting.strip(mod), modNameStyle);
-            OrderedText soundLocationId = OrderedText.styledForwardsVisitedString(this.config.soundEventId.toString(), idStyle);
+            OrderedText soundLocationId = OrderedText.styledForwardsVisitedString(id.toString(), idStyle);
 
             this.cachedToolTip.add(modName);
             this.cachedToolTip.add(soundLocationId);
