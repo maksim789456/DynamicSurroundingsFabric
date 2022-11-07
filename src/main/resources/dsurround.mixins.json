@@ -24,6 +24,7 @@
     "core.MixinSoundEvent",
     "core.MixinSoundManagerAccessor",
     "core.MixinSoundSystem",
+    "core.MixinSoundSystemLow",
     "core.MixinSoundSystemAccessors",
     "core.MixinWorld",
     "core.MixinRainSplashParticle"

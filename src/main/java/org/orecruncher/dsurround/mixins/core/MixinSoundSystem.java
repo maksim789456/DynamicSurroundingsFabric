@@ -12,7 +12,6 @@ import org.orecruncher.dsurround.runtime.audio.AudioUtilities;
 import org.orecruncher.dsurround.sound.SoundInstanceHandler;
 import org.orecruncher.dsurround.sound.SoundVolumeEvaluator;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -27,16 +26,6 @@ public abstract class MixinSoundSystem {
                 ci.cancel();
         } catch (final Exception ignore) {
         }
-    }
-
-
-    /**
-     * @author
-     * @reason
-     */
-    @Overwrite()
-    private float getAdjustedVolume(SoundInstance sound) {
-        return SoundVolumeEvaluator.getAdjustedVolume(sound);
     }
 
     @Redirect(method = "play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/sound/SoundSystem;getAdjustedVolume(FLnet/minecraft/sound/SoundCategory;)F"))
