@@ -2,7 +2,9 @@ package org.orecruncher.dsurround.runtime.sets;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import org.orecruncher.dsurround.config.BiomeLibrary;
 import org.orecruncher.dsurround.config.biome.BiomeInfo;
 import org.orecruncher.dsurround.config.biome.biometraits.BiomeTraits;
@@ -33,7 +35,7 @@ public class BiomeVariables extends VariableSet<IBiomeVariables> implements IBio
 
     @Override
     public void update() {
-        Biome newBiome = BiomeUtils.DEFAULT_BIOME;
+        Biome newBiome = GameUtils.getWorld().getRegistryManager().get(RegistryKeys.BIOME).get(BiomeKeys.THE_VOID);
         if (GameUtils.isInGame()) {
             newBiome = GameUtils.getPlayer().getEntityWorld().getBiome(GameUtils.getPlayer().getBlockPos()).value();
         }

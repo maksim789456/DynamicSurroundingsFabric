@@ -154,24 +154,24 @@ public class IndividualSoundControlListEntry extends EntryListWidget.Entry<Indiv
 
         // Need to position the other controls appropriately
         int rightMargin = rowLeft + rowWidth;
-        this.volume.x = rightMargin - this.volume.getWidth();
-        this.volume.y = rowTop;
+        this.volume.setX(rightMargin - this.volume.getWidth());
+        this.volume.setY(rowTop);
         this.volume.setHeight(rowHeight);
         rightMargin -= this.volume.getWidth() + CONTROL_SPACING;
 
-        this.playButton.x = rightMargin - this.playButton.getWidth();
-        this.playButton.y = rowTop;
+        this.playButton.setX(rightMargin - this.playButton.getWidth());
+        this.playButton.setY(rowTop);
         this.playButton.setHeight(rowHeight);
         rightMargin -= this.playButton.getWidth() + CONTROL_SPACING;
 
-        this.blockButton.x = rightMargin - this.blockButton.getWidth();
-        this.blockButton.y = rowTop;
+        this.blockButton.setX(rightMargin - this.blockButton.getWidth());
+        this.blockButton.setY(rowTop);
         this.blockButton.setHeight(rowHeight);
         rightMargin -= this.blockButton.getWidth() + CONTROL_SPACING;
 
-        this.cullButton.x = rightMargin - this.cullButton.getWidth();
+        this.cullButton.setX(rightMargin - this.cullButton.getWidth());
         this.cullButton.setHeight(rowHeight);
-        this.cullButton.y = rowTop;
+        this.cullButton.setY(rowTop);
 
         for (final ClickableWidget w : this.children)
             w.render(matrixStack, mouseX, mouseY, partialTick_);
