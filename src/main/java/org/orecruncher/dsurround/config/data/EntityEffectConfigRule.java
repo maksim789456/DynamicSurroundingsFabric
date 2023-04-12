@@ -27,9 +27,9 @@ public class EntityEffectConfigRule {
         try {
             var type = EntityType.get(entityTypeId);
             return type.<DataResult<EntityType<?>>>map(DataResult::success)
-                    .orElseGet(() -> DataResult.error(String.format("Unknown entity type id %s", entityTypeId)));
+                    .orElseGet(() -> DataResult.error(() -> String.format("Unknown entity type id %s", entityTypeId)));
         } catch (Throwable t) {
-            return DataResult.error(t.getMessage());
+            return DataResult.error(() -> t.getMessage());
         }
     }
 

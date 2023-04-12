@@ -29,7 +29,7 @@ public abstract class BlockStateMatcher implements IMatcher<BlockState> {
         try {
             return DataResult.success(create(blockId, true, true));
         } catch (Throwable t) {
-            return DataResult.error(t.getMessage());
+            return DataResult.error(() -> t.getMessage());
         }
     }
 

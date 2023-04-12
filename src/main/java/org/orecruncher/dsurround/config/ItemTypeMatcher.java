@@ -30,9 +30,9 @@ public class ItemTypeMatcher implements IMatcher<Item> {
             var matcher = MatchOnClass.<Item>parse(itemId);
             if (matcher != null)
                 return DataResult.success(matcher);
-            return DataResult.error(String.format("Unknown item class(s) %s", itemId));
+            return DataResult.error(() -> String.format("Unknown item class(s) %s", itemId));
         } catch (Throwable t) {
-            return DataResult.error(t.getMessage());
+            return DataResult.error(() -> t.getMessage());
         }
     }
 
