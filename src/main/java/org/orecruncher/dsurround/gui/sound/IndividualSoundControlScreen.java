@@ -146,7 +146,7 @@ public class IndividualSoundControlScreen extends Screen {
         this.renderBackground(matrixStack);
         this.soundConfigList.render(matrixStack, mouseX, mouseY, partialTicks);
         this.searchField.render(matrixStack, mouseX, mouseY, partialTicks);
-        DrawableHelper.drawCenteredText(matrixStack, this.textRenderer, this.title, this.width / 2, TOP_OFFSET, 16777215);
+        DrawableHelper.drawCenteredTextWithShadow(matrixStack, this.textRenderer, this.title, this.width / 2, TOP_OFFSET, 16777215);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
         if (this.soundConfigList.isMouseOver(mouseX, mouseY)) {

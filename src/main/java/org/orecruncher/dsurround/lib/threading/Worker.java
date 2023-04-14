@@ -46,7 +46,7 @@ public final class Worker {
             }
             timeTrack.end();
             long sleepTime = this.frequency - timeTrack.getLastSampleMSecs();
-            long idleTime = MathHelper.clamp(sleepTime, 0, Long.MAX_VALUE);
+            float idleTime = MathHelper.clamp(sleepTime, 0, Long.MAX_VALUE);
             var track = timeTrack.toString();
             this.diagnosticString = () -> String.format("%s (idle for %dmsecs)", track, idleTime);
             if (sleepTime > 0) {
