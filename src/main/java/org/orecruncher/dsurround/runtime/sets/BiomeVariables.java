@@ -2,7 +2,11 @@ package org.orecruncher.dsurround.runtime.sets;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.biome.Biome.Precipitation;
+
 import org.orecruncher.dsurround.config.BiomeLibrary;
 import org.orecruncher.dsurround.config.biome.BiomeInfo;
 import org.orecruncher.dsurround.config.biome.biometraits.BiomeTraits;
@@ -15,7 +19,7 @@ import org.orecruncher.dsurround.lib.scripting.VariableSet;
 public class BiomeVariables extends VariableSet<IBiomeVariables> implements IBiomeVariables {
 
     private Biome biome;
-    private final Lazy<String> precipitationType = new Lazy<>(() -> this.biome.getPrecipitation().getName());
+    private final Lazy<String> precipitationType = new Lazy<>(() -> this.setPrecipitationType());
     private BiomeInfo info;
     private final Lazy<String> name = new Lazy<>(() -> this.info.getBiomeName());
     private final Lazy<String> modid = new Lazy<>(() -> this.info.getBiomeId().getNamespace());
@@ -33,11 +37,18 @@ public class BiomeVariables extends VariableSet<IBiomeVariables> implements IBio
 
     @Override
     public void update() {
-        Biome newBiome = BiomeUtils.DEFAULT_BIOME;
+        Biome newBiome = GameUtils.getWorld().getRegistryManager().get(RegistryKeys.BIOME).get(BiomeKeys.THE_VOID);
         if (GameUtils.isInGame()) {
             newBiome = GameUtils.getPlayer().getEntityWorld().getBiome(GameUtils.getPlayer().getBlockPos()).value();
         }
         setBiome(newBiome);
+    }
+
+    private String setPrecipitationType(){
+        if(this.biome.hasPrecipitation())
+            return this.biome.getTemperature()<0.15F ? Precipitation.SNOW.toString(): Precipitation.RAIN.toString();
+        else
+            return Precipitation.NONE.toString();
     }
 
     public void setBiome(final Biome biome) {
@@ -66,10 +77,10 @@ public class BiomeVariables extends VariableSet<IBiomeVariables> implements IBio
     public String getName() {
         return this.name.get();
     }
-
+    //downfall deprecated or something. No longer scoped out of Biome instances
     @Override
     public float getRainfall() {
-        return this.biome.getDownfall();
+        throw new UnsupportedOperationException("Unimplemented method 'getRainfall'");
     }
 
     @Override

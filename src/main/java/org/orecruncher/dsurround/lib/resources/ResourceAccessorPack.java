@@ -2,6 +2,7 @@ package org.orecruncher.dsurround.lib.resources;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.resource.InputSupplier;
 import net.minecraft.resource.ResourcePack;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
@@ -24,8 +25,9 @@ final class ResourceAccessorPack extends ResourceAccessorBase {
     @Override
     protected byte[] getAsset() {
         try {
-            try (InputStream stream = this.pack.open(ResourceType.CLIENT_RESOURCES, this.actual)) {
-                return IOUtils.toByteArray(stream);
+            InputSupplier<InputStream> streamSupplier = this.pack.open(ResourceType.CLIENT_RESOURCES, this.actual);
+            if (streamSupplier != null) {
+                return IOUtils.toByteArray(streamSupplier.get());
             }
         } catch (final Throwable t) {
             logError(t);

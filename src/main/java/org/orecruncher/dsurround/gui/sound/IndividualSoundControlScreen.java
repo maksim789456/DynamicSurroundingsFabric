@@ -8,11 +8,14 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.ScreenTexts;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 import org.orecruncher.dsurround.lib.GameUtils;
+import org.orecruncher.dsurround.lib.gui.ButtonControl;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 @Environment(EnvType.CLIENT)
 public class IndividualSoundControlScreen extends Screen {
@@ -54,8 +57,6 @@ public class IndividualSoundControlScreen extends Screen {
 
     @Override
     protected void init() {
-        GameUtils.getMC().keyboard.setRepeatEvents(true);
-
         // Setup search bar
         final int searchBarLeftMargin = (this.width - SEARCH_BAR_WIDTH) / 2;
         final int searchBarY = TOP_OFFSET + HEADER_HEIGHT - SEARCH_BAR_HEIGHT;
@@ -92,7 +93,7 @@ public class IndividualSoundControlScreen extends Screen {
         // Set the control buttons at the bottom
         final int controlMargin = (this.width - CONTROL_WIDTH) / 2;
         final int controlHeight = this.height - BOTTOM_OFFSET - BUTTON_HEIGHT;
-        this.save = new ButtonWidget(
+        this.save = new ButtonControl(
                 controlMargin,
                 controlHeight,
                 BUTTON_WIDTH,
@@ -101,7 +102,7 @@ public class IndividualSoundControlScreen extends Screen {
                 this::save);
         this.addDrawableChild(this.save);
 
-        this.cancel = new ButtonWidget(
+        this.cancel = new ButtonControl(
                 controlMargin + BUTTON_WIDTH + BUTTON_SPACING,
                 controlHeight,
                 BUTTON_WIDTH,
@@ -145,7 +146,7 @@ public class IndividualSoundControlScreen extends Screen {
         this.renderBackground(matrixStack);
         this.soundConfigList.render(matrixStack, mouseX, mouseY, partialTicks);
         this.searchField.render(matrixStack, mouseX, mouseY, partialTicks);
-        DrawableHelper.drawCenteredText(matrixStack, this.textRenderer, this.title, this.width / 2, TOP_OFFSET, 16777215);
+        DrawableHelper.drawCenteredTextWithShadow(matrixStack, this.textRenderer, this.title, this.width / 2, TOP_OFFSET, 16777215);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
         if (this.soundConfigList.isMouseOver(mouseX, mouseY)) {

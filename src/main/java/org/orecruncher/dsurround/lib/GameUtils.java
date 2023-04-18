@@ -11,9 +11,11 @@ import net.minecraft.client.option.Perspective;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.resource.ResourcePackManager;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.registry.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;

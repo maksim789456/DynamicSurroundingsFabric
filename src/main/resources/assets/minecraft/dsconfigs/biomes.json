@@ -212,7 +212,7 @@
     "fogColor": "#808080"
   },
   {
-    "biomeSelector": "biome.getRainfall() < 0.1 && (biome.isOneOf('Sandy','Mesa') || (biome.is('Wasteland') && !biome.isOneOf('Cold','Snowy','Swamp')))",
+    "biomeSelector": "(biome.isOneOf('Sandy','Mesa','Dry') || (biome.is('Wasteland') && !biome.isOneOf('Cold','Snowy','Swamp')))",
     "_comment": "Dust for desert like biomes",
     "fogColor": "#FFEA97"
   },

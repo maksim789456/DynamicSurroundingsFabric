@@ -1,8 +1,7 @@
 package org.orecruncher.dsurround.config.biome.biometraits;
 
-import net.minecraft.tag.BiomeTags;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import org.orecruncher.dsurround.lib.GameUtils;
@@ -16,7 +15,7 @@ public class BiomeCategoryAnalyzer implements IBiomeTraitAnalyzer {
 
         //Biome selector (in biomes.jsom) checks biome id in traits (like minecraft:ocean)
         //We start use ConventionalBiomeTags from Fabric to fix this
-        var biomes = GameUtils.getWorld().getRegistryManager().get(Registry.BIOME_KEY);
+        var biomes = GameUtils.getWorld().getRegistryManager().get(RegistryKeys.BIOME);
 
         //Search tags for current biome, sort only Fabric tags, checks to contain in BiomeTrait, and covert
         var entry = biomes.getEntry(biomes.getRawId(biome));

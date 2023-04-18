@@ -63,7 +63,7 @@ public class BreathEffect extends EntityEffectBase {
 
     protected BlockPos getHeadPosition(final LivingEntity entity) {
         final double d0 = entity.getEyeY();
-        return new BlockPos(entity.getX(), d0, entity.getZ());
+        return BlockPos.ofFloored(entity.getX(), d0, entity.getZ());
     }
 
     protected boolean showWaterBubbles(final BlockState headBlock) {

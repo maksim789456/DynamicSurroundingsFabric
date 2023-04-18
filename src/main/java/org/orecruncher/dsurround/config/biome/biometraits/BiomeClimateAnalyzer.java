@@ -2,7 +2,7 @@ package org.orecruncher.dsurround.config.biome.biometraits;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
-
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,10 +22,10 @@ public class BiomeClimateAnalyzer implements IBiomeTraitAnalyzer {
             return results;
         }
 
-        if (biome.getPrecipitation() == Biome.Precipitation.SNOW)
-            results.add(BiomeTrait.SNOWY);
-
         var biomeTemp = biome.getTemperature();
+
+        if(biomeTemp<0.15F)
+            results.add(BiomeTrait.SNOWY);
 
         // Nether is always hot
         if (path.contains("nether") || path.contains("soul_sand_valley") || path.contains("basalt_deltas") || path.contains("warped_forest") || path.contains("crimson_forest"))
@@ -35,16 +35,14 @@ public class BiomeClimateAnalyzer implements IBiomeTraitAnalyzer {
             results.add(BiomeTrait.COLD);
         else if (biomeTemp > 1F)
             results.add(BiomeTrait.HOT);
+        
+        String [] wetBiomes = {"jungle","swamp","snowy_slopes","frozen_peaks","mangrove_swamp","mushroom_fields"};
+        String [] dryBiomes = {"desert","savanna","badlands","nether","soul_sand_valley","warped_forest","crimson_forest","basalt_deltas"};
 
-        var rainfall = biome.getDownfall();
-
-        if (path.contains("jungle") || path.contains("swamp"))
-//        if (category == Biome.Category.JUNGLE || category == Biome.Category.SWAMP)
+        if (Arrays.stream(wetBiomes).anyMatch(path::contains))
             results.add(BiomeTrait.WET);
-        else if (rainfall < 0.15F)
+        else if (Arrays.stream(dryBiomes).anyMatch(path::contains))
             results.add(BiomeTrait.DRY);
-        else if (rainfall > 0.85)
-            results.add(BiomeTrait.WET);
 
         return results;
     }

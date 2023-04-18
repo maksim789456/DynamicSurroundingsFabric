@@ -1,10 +1,12 @@
 package org.orecruncher.dsurround.lib.block;
 
 import com.google.common.collect.ImmutableMap;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import org.orecruncher.dsurround.Client;
@@ -78,7 +80,7 @@ final class BlockStateParser {
         }
 
         final Identifier resource = new Identifier(temp);
-        final Block block = Registry.BLOCK.get(resource);
+        final Block block = Registries.BLOCK.get(resource);
         if (block == Blocks.AIR && !"mincraft:air".equals(temp)) {
             throw new BlockStateParseException(String.format("Unknown block '%s' for entry '%s'", temp, blockName));
         }

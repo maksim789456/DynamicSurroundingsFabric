@@ -7,13 +7,12 @@ import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class ButtonControl extends ButtonWidget {
-
     public ButtonControl(int i, int j, int k, int l, Text text, PressAction pressAction) {
-        super(i, j, k, l, text, pressAction);
+        super(i, j, k, l, text, pressAction, ButtonWidget.DEFAULT_NARRATION_SUPPLIER);
     }
 
-    public ButtonControl(int i, int j, int k, int l, Text text, PressAction pressAction, TooltipSupplier tooltipSupplier) {
-        super(i, j, k, l, text, pressAction, tooltipSupplier);
+    public ButtonControl(int i, int j, int k, int l, Text text, PressAction pressAction, NarrationSupplier narrationSupplier) {
+        super(i, j, k, l, text, pressAction, narrationSupplier);
     }
 
     public void setWidth(int width) {
