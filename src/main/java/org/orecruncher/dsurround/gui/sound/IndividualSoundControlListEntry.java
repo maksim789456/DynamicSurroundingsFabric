@@ -3,8 +3,11 @@ package org.orecruncher.dsurround.gui.sound;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.Element;
+import net.minecraft.client.gui.Selectable;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.gui.widget.EntryListWidget;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.util.math.MatrixStack;
@@ -25,7 +28,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public class IndividualSoundControlListEntry extends EntryListWidget.Entry<IndividualSoundControlListEntry> implements AutoCloseable {
+public class IndividualSoundControlListEntry extends ElementListWidget.Entry<IndividualSoundControlListEntry> implements AutoCloseable {
 
     private static final int BUTTON_WIDTH = 60;
     private static final int TOOLTIP_WIDTH = 300;
@@ -99,34 +102,34 @@ public class IndividualSoundControlListEntry extends EntryListWidget.Entry<Indiv
         this.playButton.active = enablePlay;
         this.children.add(this.playButton);
     }
-
+    @Override
     public void mouseMoved(double mouseX, double mouseY) {
         ClickableWidget child = this.findChild(mouseX, mouseY);
         if (child != null)
             child.mouseMoved(mouseX, mouseY);
     }
-
+    @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         ClickableWidget child = this.findChild(mouseX, mouseY);
         if (child != null)
             return child.mouseClicked(mouseX, mouseY, button);
         return false;
     }
-
+    @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         ClickableWidget child = this.findChild(mouseX, mouseY);
         if (child != null)
             return child.mouseReleased(mouseX, mouseY, button);
         return false;
     }
-
+    @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
         ClickableWidget child = this.findChild(mouseX, mouseY);
         if (child != null)
             return child.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
         return false;
     }
-
+    @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
         ClickableWidget child = this.findChild(mouseX, mouseY);
         if (child != null)
@@ -135,17 +138,16 @@ public class IndividualSoundControlListEntry extends EntryListWidget.Entry<Indiv
     }
 
     private ClickableWidget findChild(double mouseX, double mouseY) {
-        if (this.isMouseOver(mouseX, mouseY)) {
+        // if (this.isMouseOver(mouseX, mouseY)) {
             for (ClickableWidget e : this.children) {
                 if (e.isMouseOver(mouseX, mouseY)) {
                     return e;
                 }
             }
-        }
+        //}
         return null;
     }
 
-    @Override
     public void render(final MatrixStack matrixStack, int index, int rowTop, int rowLeft, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean mouseOver, float partialTick_) {
         final TextRenderer font = GameUtils.getTextRenderer();
         final float labelY = rowTop + (rowHeight - font.fontHeight) / 2F;
@@ -277,5 +279,14 @@ public class IndividualSoundControlListEntry extends EntryListWidget.Entry<Indiv
     public IndividualSoundConfigEntry getData() {
         return this.config;
     }
-
+    @Override
+    public List<? extends Element> children() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'children'");
+    }
+    @Override
+    public List<? extends Selectable> selectableChildren() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'selectableChildren'");
+    }
 }
