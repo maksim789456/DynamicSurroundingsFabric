@@ -31,12 +31,29 @@ public class AreaBlockEffects extends ClientHandler {
 
     @Override
     public void process(final PlayerEntity player) {
+        // No player == stop processing all sounds
+        // reduces crash events, but why it can be happened #Investigate
+        // This issue can be related to Minecraft Game itself
+        if (player == null) return;
+
         if (!isConnected) return;
 
-        this.blockEffects.tick(player);
-        this.nearEffects.tick();
-        this.farEffects.tick();
-        this.alwaysOn.tick();
+        // null checks sequence
+        // reduces crash events, but eventually can lead to no sound events appeared
+        // #Investigate
+        // TODO: #ImplementLogging #GatherLogsAfterPatch #GatherIssuesAfterPatch
+        if (this.blockEffects != null) {
+            this.blockEffects.tick(player);
+        }
+        if (this.nearEffects != null) {
+            this.nearEffects.tick();
+        }
+        if (this.farEffects != null) {
+            this.farEffects.tick();
+        }
+        if (this.alwaysOn != null) {
+            this.alwaysOn.tick();
+        }
     }
 
     @Override
