@@ -41,13 +41,6 @@ whether LPs can be monetized on the various streaming services.
      <li>S: <a href="https://www.freesound.org/people/aaronstar/sounds/194849/">NM-Mejor-Lado-Thunder-01.wav</a> by <a href="https://www.freesound.org/people/aaronstar/">aaronstar</a> | License: Creative Commons 0</li> 
 </ul>
 
-*dsurround:lilypad.bullfrog*
-
-<ul>
-     <li>S: <a href="https://freesound.org/people/sunsinger/sounds/80840/">Night Crickets & Bullfrogs.wav</a> by <a href="https://www.freesound.org/people/rayjensen/">sunsinger</a> | License: Attribution</li>
-</ul>
-
-
 *dsurround:waterfall.0*
 
 <ul>
