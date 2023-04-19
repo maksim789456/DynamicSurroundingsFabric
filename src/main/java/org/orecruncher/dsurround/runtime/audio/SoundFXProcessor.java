@@ -136,7 +136,7 @@ public final class SoundFXProcessor {
         // Double suplex!  Queue the operation on the sound executor to do the config work.  This should queue in
         // behind any attempt at getting a sound source.
         entry.run(source -> {
-            var id = ((ISourceContext) source).getId();
+            int id = ((ISourceContext) source).getId();
             if (id > 0) {
                 final SourceContext ctx = new SourceContext();
                 ctx.attachSound(sound);
