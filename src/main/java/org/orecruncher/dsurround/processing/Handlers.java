@@ -47,8 +47,7 @@ public class Handlers {
     }
 
     private void register(final ClientHandler handler) {
-        // null check
-        if (this.effectHandlers != null || handler != null) {
+        if (this.effectHandlers != null && handler != null) {
             this.effectHandlers.add(handler);
             LOGGER.debug("Registered handler [%s]", handler.getClass().getName());
         }
@@ -71,10 +70,8 @@ public class Handlers {
         if (!isConnected) {
             isConnected = true;
             
-            // null check
             if (this.effectHandlers != null) {
                 for (final ClientHandler h : this.effectHandlers) {
-                    // null check
                     if (h == null) continue;
                     
                     h.connect0();
@@ -86,13 +83,11 @@ public class Handlers {
     }
 
     private void onDisconnect(ClientPlayNetworkHandler handler, MinecraftClient client) {
-        // null check
         // No client or network handler == not connected
         if (handler == null || client == null) return;
         
         if (this.effectHandlers != null) {
             for (final ClientHandler h : this.effectHandlers) {
-                // null check
                 if (h == null) continue;
                 h.disconnect0();
             }
@@ -110,10 +105,10 @@ public class Handlers {
     protected boolean playerChunkLoaded() {
         var player = GameUtils.getPlayer();
         
-        // null check before it crash game
+        // before it crash game
         if (player != null) {
             var pos = player.getBlockPos();
-            // null check before it crash game also
+            // before it crash game also
             if (pos != null) {
                 return WorldUtils.isChunkLoaded(player.getEntityWorld(), pos);
             }
@@ -124,7 +119,6 @@ public class Handlers {
     }
 
     public void onTick(MinecraftClient client) {
-        // null check
         // reduces crashes. #Investigate
         if (client == null) return;
         
@@ -134,15 +128,12 @@ public class Handlers {
         if (!doTick())
             return;
 
-        // null check
         if (this.handlerTimer != null) {
             this.handlerTimer.begin();
             final long tick = TickCounter.getTickCount();
 
-            // null check
             if (this.effectHandlers != null) {
                 for (final ClientHandler handler : this.effectHandlers) {
-                    // null check
                     // reduces crashes, continue if handler is null
                     if (handler == null) continue;
 
@@ -159,7 +150,6 @@ public class Handlers {
     private void handleStartupSound() {
         var client = GameUtils.getMC();
         
-        // null check
         if (client == null) return;
         
         if (client.getOverlay() != null)
@@ -176,24 +166,20 @@ public class Handlers {
                             .create(id)
                             .build()
                             .createAsAdditional();
-                    // null check
                     if (sound == null) return;
                     client.getSoundManager().play(sound);
                 });
     }
 
     public void gatherDiagnostics(Collection<String> left, Collection<String> right, Collection<TimerEMA> timers) {
-        // null check
         // null handlerTimer useless
         // null timers lead crash
         if (timers == null || this.handlerTimer == null) return;
         
         timers.add(this.handlerTimer);
 
-        // null check
         if (this.effectHandlers != null) {
             this.effectHandlers.forEach(h -> {
-                // null check
                 if (h == null) return;
 
                 h.gatherDiagnostics(left, right, timers);
