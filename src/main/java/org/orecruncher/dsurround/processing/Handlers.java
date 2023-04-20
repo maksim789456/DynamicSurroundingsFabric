@@ -48,7 +48,7 @@ public class Handlers {
 
     private void register(final ClientHandler handler) {
         // null check
-        if (this.effectHandlers != null or handler != null) {
+        if (this.effectHandlers != null || handler != null) {
             this.effectHandlers.add(handler);
             LOGGER.debug("Registered handler [%s]", handler.getClass().getName());
         }
@@ -88,7 +88,7 @@ public class Handlers {
     private void onDisconnect(ClientPlayNetworkHandler handler, MinecraftClient client) {
         // null check
         // No client or network handler == not connected
-        if (handler == null or client == null) return;
+        if (handler == null || client == null) return;
         
         if (this.effectHandlers != null) {
             for (final ClientHandler h : this.effectHandlers) {
@@ -186,7 +186,7 @@ public class Handlers {
         // null check
         // null handlerTimer useless
         // null timers lead crash
-        if (timers == null or this.handlerTimer == null) return;
+        if (timers == null || this.handlerTimer == null) return;
         
         timers.add(this.handlerTimer);
 
