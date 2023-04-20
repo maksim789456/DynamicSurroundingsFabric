@@ -194,7 +194,7 @@ public class Handlers {
         if (this.effectHandlers != null) {
             this.effectHandlers.forEach(h -> {
                 // null check
-                if (h == null) continue;
+                if (h == null) return;
 
                 h.gatherDiagnostics(left, right, timers);
                 timers.add(h.getTimer());
