@@ -31,14 +31,9 @@ public class AreaBlockEffects extends ClientHandler {
 
     @Override
     public void process(final PlayerEntity player) {
-        // No player == stop processing all sounds
-        // reduces crash events, but why it can be happened #Investigate
-        // This issue can be related to Minecraft Game itself
         if (player == null) return;
-
         if (!isConnected) return;
 
-        // null checks sequence
         // reduces crash events, but eventually can lead to no sound events appeared
         // #Investigate
         // TODO: #ImplementLogging #GatherLogsAfterPatch #GatherIssuesAfterPatch
@@ -86,6 +81,8 @@ public class AreaBlockEffects extends ClientHandler {
 
     @Override
     protected void gatherDiagnostics(Collection<String> left, Collection<String> right, Collection<TimerEMA> timers) {
+        if (this.blockEffects == null || left == null) return;
+        
         left.add(Formatting.LIGHT_PURPLE + String.format("Total Effects: %d", this.blockEffects.count()));
     }
 }
