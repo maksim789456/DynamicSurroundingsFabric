@@ -31,12 +31,24 @@ public class AreaBlockEffects extends ClientHandler {
 
     @Override
     public void process(final PlayerEntity player) {
+        if (player == null) return;
         if (!isConnected) return;
 
-        this.blockEffects.tick(player);
-        this.nearEffects.tick();
-        this.farEffects.tick();
-        this.alwaysOn.tick();
+        // reduces crash events, but eventually can lead to no sound events appeared
+        // #Investigate
+        // TODO: #ImplementLogging #GatherLogsAfterPatch #GatherIssuesAfterPatch
+        if (this.blockEffects != null) {
+            this.blockEffects.tick(player);
+        }
+        if (this.nearEffects != null) {
+            this.nearEffects.tick();
+        }
+        if (this.farEffects != null) {
+            this.farEffects.tick();
+        }
+        if (this.alwaysOn != null) {
+            this.alwaysOn.tick();
+        }
     }
 
     @Override
@@ -69,6 +81,8 @@ public class AreaBlockEffects extends ClientHandler {
 
     @Override
     protected void gatherDiagnostics(Collection<String> left, Collection<String> right, Collection<TimerEMA> timers) {
+        if (this.blockEffects == null || left == null) return;
+        
         left.add(Formatting.LIGHT_PURPLE + String.format("Total Effects: %d", this.blockEffects.count()));
     }
 }

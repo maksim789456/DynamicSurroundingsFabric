@@ -47,8 +47,10 @@ public class Handlers {
     }
 
     private void register(final ClientHandler handler) {
-        this.effectHandlers.add(handler);
-        LOGGER.debug("Registered handler [%s]", handler.getClass().getName());
+        if (this.effectHandlers != null && handler != null) {
+            this.effectHandlers.add(handler);
+            LOGGER.debug("Registered handler [%s]", handler.getClass().getName());
+        }
     }
 
     private void init() {
@@ -65,18 +67,31 @@ public class Handlers {
     }
 
     private void onConnect(ClientPlayNetworkHandler handler, PacketSender sender, MinecraftClient client) {
-        if (isConnected) {
-            LOGGER.warn("Attempt to initialize EffectManager when it is already initialized");
-            onDisconnect(null, null);
+        if (!isConnected) {
+            isConnected = true;
+            
+            if (this.effectHandlers != null) {
+                for (final ClientHandler h : this.effectHandlers) {
+                    if (h == null) continue;
+                    
+                    h.connect0();
+                }
+            }
+        } else {
+            LOGGER.warn("Attempt to initialize EffectManager when it is already initialized. Skipping...");
         }
-        isConnected = true;
-        for (final ClientHandler h : this.effectHandlers)
-            h.connect0();
     }
 
     private void onDisconnect(ClientPlayNetworkHandler handler, MinecraftClient client) {
-        for (final ClientHandler h : this.effectHandlers)
-            h.disconnect0();
+        // No client or network handler == not connected
+        if (handler == null || client == null) return;
+        
+        if (this.effectHandlers != null) {
+            for (final ClientHandler h : this.effectHandlers) {
+                if (h == null) continue;
+                h.disconnect0();
+            }
+        }
         isConnected = false;
     }
 
@@ -89,31 +104,54 @@ public class Handlers {
 
     protected boolean playerChunkLoaded() {
         var player = GameUtils.getPlayer();
-        var pos = player.getBlockPos();
-        return WorldUtils.isChunkLoaded(player.getEntityWorld(), pos);
+        
+        // before it crash game
+        if (player != null) {
+            var pos = player.getBlockPos();
+            // before it crash game also
+            if (pos != null) {
+                return WorldUtils.isChunkLoaded(player.getEntityWorld(), pos);
+            }
+        } else {
+            LOGGER.info("Player not loaded yet.");
+        }
+        return false;
     }
 
     public void onTick(MinecraftClient client) {
+        // reduces crashes. #Investigate
+        if (client == null) return;
+        
         if (!this.startupSoundPlayed)
             handleStartupSound();
 
         if (!doTick())
             return;
 
-        this.handlerTimer.begin();
-        final long tick = TickCounter.getTickCount();
+        if (this.handlerTimer != null) {
+            this.handlerTimer.begin();
+            final long tick = TickCounter.getTickCount();
 
-        for (final ClientHandler handler : this.effectHandlers) {
-            final long mark = System.nanoTime();
-            if (handler.doTick(tick))
-                handler.process(getPlayer());
-            handler.updateTimer(System.nanoTime() - mark);
+            if (this.effectHandlers != null) {
+                for (final ClientHandler handler : this.effectHandlers) {
+                    // reduces crashes, continue if handler is null
+                    if (handler == null) continue;
+
+                    final long mark = System.nanoTime();
+                    if (handler.doTick(tick))
+                        handler.process(getPlayer());
+                    handler.updateTimer(System.nanoTime() - mark);
+                }
+            }
+            this.handlerTimer.end();
         }
-        this.handlerTimer.end();
     }
 
     private void handleStartupSound() {
         var client = GameUtils.getMC();
+        
+        if (client == null) return;
+        
         if (client.getOverlay() != null)
             return;
 
@@ -128,16 +166,25 @@ public class Handlers {
                             .create(id)
                             .build()
                             .createAsAdditional();
+                    if (sound == null) return;
                     client.getSoundManager().play(sound);
                 });
     }
 
     public void gatherDiagnostics(Collection<String> left, Collection<String> right, Collection<TimerEMA> timers) {
+        // null handlerTimer useless
+        // null timers lead crash
+        if (timers == null || this.handlerTimer == null) return;
+        
         timers.add(this.handlerTimer);
 
-        this.effectHandlers.forEach(h -> {
-            h.gatherDiagnostics(left, right, timers);
-            timers.add(h.getTimer());
-        });
+        if (this.effectHandlers != null) {
+            this.effectHandlers.forEach(h -> {
+                if (h == null) return;
+
+                h.gatherDiagnostics(left, right, timers);
+                timers.add(h.getTimer());
+            });
+        }
     }
 }
