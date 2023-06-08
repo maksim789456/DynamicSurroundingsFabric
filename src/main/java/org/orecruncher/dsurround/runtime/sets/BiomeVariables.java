@@ -77,10 +77,11 @@ public class BiomeVariables extends VariableSet<IBiomeVariables> implements IBio
     public String getName() {
         return this.name.get();
     }
-    //downfall deprecated or something. No longer scoped out of Biome instances
+
     @Override
     public float getRainfall() {
-        throw new UnsupportedOperationException("Unimplemented method 'getRainfall'");
+        //downfall deprecated or something. No longer scoped out of Biome instances
+        return 0f;
     }
 
     @Override
