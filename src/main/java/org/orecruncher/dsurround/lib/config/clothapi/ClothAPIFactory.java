@@ -119,8 +119,8 @@ public class ClothAPIFactory implements BiFunction<MinecraftClient, Screen, Scre
         return categoryBuilder;
     }
 
-    protected @Nullable FieldBuilder<?, ? extends AbstractConfigListEntry<?>> generate(final ConfigEntryBuilder builder, ConfigElement.PropertyValue<?> pv, Object instance) {
-        FieldBuilder<?, ? extends AbstractConfigListEntry<?>> fieldBuilder = null;
+    protected @Nullable FieldBuilder<?, ? extends AbstractConfigListEntry<?>, ?> generate(final ConfigEntryBuilder builder, ConfigElement.PropertyValue<?> pv, Object instance) {
+        FieldBuilder<?, ? extends AbstractConfigListEntry<?>, ?> fieldBuilder = null;
 
         var name = this.options.transformProperty(pv.getElementNameKey());
         var tooltip = this.options.transformTooltip(pv.getTooltip());

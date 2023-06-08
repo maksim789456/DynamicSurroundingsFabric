@@ -15,7 +15,7 @@ import java.util.function.Supplier;
  * Special EnumSelectorBuilder that deal with enums anonymously.  Makes for easier gluing between config and
  * menu display.
  */
-public class EnumSelectorBuilder extends FieldBuilder<Enum<?>, EnumListEntry<Enum<?>>> {
+public class EnumSelectorBuilder extends FieldBuilder<Enum<?>, EnumListEntry<Enum<?>>, EnumSelectorBuilder> {
     private Consumer<Enum<?>> saveConsumer = null;
     private Function<Enum<?>, Optional<Text[]>> tooltipSupplier = e -> Optional.empty();
     private final Enum<?> value;
