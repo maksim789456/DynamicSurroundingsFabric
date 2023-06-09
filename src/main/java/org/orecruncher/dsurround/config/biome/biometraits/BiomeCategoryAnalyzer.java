@@ -43,7 +43,7 @@ public class BiomeCategoryAnalyzer implements IBiomeTraitAnalyzer {
             results.add(BiomeTrait.CONIFEROUS);
 
         //Arctic Wind in snow biomes
-        if (path.contains("snowy_slopes") || path.contains("jagged_peaks") || path.contains("grove"))
+        if (path.contains("snowy_slopes") || path.contains("jagged_peaks") || path.startsWith("grove"))
         {
             if (!results.contains(BiomeTrait.COLD))
                 results.add(BiomeTrait.COLD);
